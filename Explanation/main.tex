@@ -1,0 +1,69 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\textheight = 25cm 
+\textwidth = 16cm
+\topmargin = -3.0cm 
+\oddsidemargin = 1cm
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=blue,
+    citecolor=black,      
+    urlcolor=blue,
+    }
+
+\usepackage{float}
+\usepackage{graphicx}
+
+\usepackage{gensymb}
+
+\usepackage{amsmath}
+\DeclareMathOperator*{\argmax}{argmax} % thin space, limits 
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{mathtools, xparse}
+\usepackage[shortlabels]{enumitem}
+
+\usepackage[many]{tcolorbox}
+\usepackage{lipsum}
+\usepackage{amssymb}
+
+\title{Competitive Programing}
+\author{Cerritos Lira, Carlos}
+\date{23 de junio del 2020}
+
+\newcommand{\pr}[1]{\left(#1\right)}
+\newcommand{\pt}[2]{\dfrac{\partial #1}{\partial #2}}
+
+\newcommand{\ceil}[1]{\left \lceil #1 \right \rceil}  
+\newcommand{\floor}[1]{\left \lfloor #1 \right \rfloor}  
+
+
+\begin{document}
+\maketitle
+
+\section*{Abbreviation.py}
+Our goal is to find a bottom-up approach, let's analize the example:
+\[ a = \text{AbcDE}, b = \text{ABDE} \]
+Given two string with letters $a=a_0a_1...$, $b=b_0b_1...$, define: 
+\[ F(i,j) = 1 \text{,\quad if $b[0:i]$ is an abbrevation of $a[0:j]$, 0 otherwise} \] 
+our answer is then $F(-1,-1)$. Then our goal is to find a recursive relation for $F(i,j)$,
+we already know the following:
+\begin{align*}
+    F(i,j) &= 0 \text{,\quad if $i>j$}
+\end{align*}
+we have two cases:
+\begin{enumerate}
+    \item $a[j]$ upper case. 
+    \begin{enumerate}
+        \item $a[j] = b[i]$ and $F(i-1,j-1) = 1$, then $1$, otherwise $0$
+    \end{enumerate}
+    \item $a[j]$ lower case
+    \begin{enumerate}
+        \item upper $a[j] = b[i]$, if $F(i-1,j-1)=1$ or $F(i,j-1)=1$, then $1$ otherwise $0$.
+        \item upper $a[j] \neq b[i]$, if $F(i,j-1)=1$, then 1 otherwise $0$.
+    \end{enumerate}
+\end{enumerate}
+
+\end{document}
